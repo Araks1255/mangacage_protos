@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package servoce_notifications;
+
+option go_package = "mangacage/protos/service_notifications";
+
+service ServiceNotifications {
+    rpc NotifyAboutNewTitleOnModeration (TitleOnModeration) returns (Empty);
+    rpc NotifyAboutNewChapterOnModeration (ChapterOnModeration) returns (Empty);
+}
+
+message TitleOnModeration {
+    string TitleName = 1;
+}
+
+message ChapterOnModeration {
+    string TitleName = 1;
+    string ChapterName = 2;
+}
+
+message Empty {}
