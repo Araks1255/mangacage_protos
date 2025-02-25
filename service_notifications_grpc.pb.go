@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: proto/service_notifications/service_notifications.proto
+// source: service_notifications.proto
 
 package service_notifications
 
@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ServiceNotifications_NotifyAboutNewTitleOnModeration_FullMethodName   = "/servoce_notifications.ServiceNotifications/NotifyAboutNewTitleOnModeration"
-	ServiceNotifications_NotifyAboutNewChapterOnModeration_FullMethodName = "/servoce_notifications.ServiceNotifications/NotifyAboutNewChapterOnModeration"
+	ServiceNotifications_NotifyAboutNewTitleOnModeration_FullMethodName   = "/service_notifications.ServiceNotifications/NotifyAboutNewTitleOnModeration"
+	ServiceNotifications_NotifyAboutNewChapterOnModeration_FullMethodName = "/service_notifications.ServiceNotifications/NotifyAboutNewChapterOnModeration"
 )
 
 // ServiceNotificationsClient is the client API for ServiceNotifications service.
@@ -142,7 +142,7 @@ func _ServiceNotifications_NotifyAboutNewChapterOnModeration_Handler(srv interfa
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ServiceNotifications_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "servoce_notifications.ServiceNotifications",
+	ServiceName: "service_notifications.ServiceNotifications",
 	HandlerType: (*ServiceNotificationsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -155,5 +155,5 @@ var ServiceNotifications_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/service_notifications/service_notifications.proto",
+	Metadata: "service_notifications.proto",
 }

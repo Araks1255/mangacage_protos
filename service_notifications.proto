@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package servoce_notifications;
+package service_notifications;
 
 option go_package = "mangacage/protos/service_notifications";
 
