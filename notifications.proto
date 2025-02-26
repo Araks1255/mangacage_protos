@@ -9,6 +9,11 @@ service ServiceNotifications {
     rpc NotifyAboutNewChapterOnModeration (ChapterOnModeration) returns (Empty);
 }
 
+service UserNotifications {
+    rpc NotifyAboutReleaseOfNewChapterInTitle (ReleasedChapter) returns (Empty);
+    rpc PasswordRecovery (User) returns (Empty);
+}
+
 message TitleOnModeration {
     string TitleName = 1;
 }
@@ -16,6 +21,14 @@ message TitleOnModeration {
 message ChapterOnModeration {
     string TitleName = 1;
     string ChapterName = 2;
+}
+
+message User {
+    string Name = 1;
+}
+
+message ReleasedChapter {
+    string Name = 1;
 }
 
 message Empty {}

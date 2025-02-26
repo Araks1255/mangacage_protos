@@ -157,3 +157,143 @@ var ServiceNotifications_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "notifications.proto",
 }
+
+const (
+	UserNotifications_NotifyAboutReleaseOfNewChapterInTitle_FullMethodName = "/notifications.UserNotifications/NotifyAboutReleaseOfNewChapterInTitle"
+	UserNotifications_PasswordRecovery_FullMethodName                      = "/notifications.UserNotifications/PasswordRecovery"
+)
+
+// UserNotificationsClient is the client API for UserNotifications service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type UserNotificationsClient interface {
+	NotifyAboutReleaseOfNewChapterInTitle(ctx context.Context, in *ReleasedChapter, opts ...grpc.CallOption) (*Empty, error)
+	PasswordRecovery(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error)
+}
+
+type userNotificationsClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewUserNotificationsClient(cc grpc.ClientConnInterface) UserNotificationsClient {
+	return &userNotificationsClient{cc}
+}
+
+func (c *userNotificationsClient) NotifyAboutReleaseOfNewChapterInTitle(ctx context.Context, in *ReleasedChapter, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, UserNotifications_NotifyAboutReleaseOfNewChapterInTitle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userNotificationsClient) PasswordRecovery(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, UserNotifications_PasswordRecovery_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// UserNotificationsServer is the server API for UserNotifications service.
+// All implementations must embed UnimplementedUserNotificationsServer
+// for forward compatibility.
+type UserNotificationsServer interface {
+	NotifyAboutReleaseOfNewChapterInTitle(context.Context, *ReleasedChapter) (*Empty, error)
+	PasswordRecovery(context.Context, *User) (*Empty, error)
+	mustEmbedUnimplementedUserNotificationsServer()
+}
+
+// UnimplementedUserNotificationsServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedUserNotificationsServer struct{}
+
+func (UnimplementedUserNotificationsServer) NotifyAboutReleaseOfNewChapterInTitle(context.Context, *ReleasedChapter) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutReleaseOfNewChapterInTitle not implemented")
+}
+func (UnimplementedUserNotificationsServer) PasswordRecovery(context.Context, *User) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PasswordRecovery not implemented")
+}
+func (UnimplementedUserNotificationsServer) mustEmbedUnimplementedUserNotificationsServer() {}
+func (UnimplementedUserNotificationsServer) testEmbeddedByValue()                           {}
+
+// UnsafeUserNotificationsServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to UserNotificationsServer will
+// result in compilation errors.
+type UnsafeUserNotificationsServer interface {
+	mustEmbedUnimplementedUserNotificationsServer()
+}
+
+func RegisterUserNotificationsServer(s grpc.ServiceRegistrar, srv UserNotificationsServer) {
+	// If the following call pancis, it indicates UnimplementedUserNotificationsServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&UserNotifications_ServiceDesc, srv)
+}
+
+func _UserNotifications_NotifyAboutReleaseOfNewChapterInTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReleasedChapter)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserNotificationsServer).NotifyAboutReleaseOfNewChapterInTitle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserNotifications_NotifyAboutReleaseOfNewChapterInTitle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserNotificationsServer).NotifyAboutReleaseOfNewChapterInTitle(ctx, req.(*ReleasedChapter))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserNotifications_PasswordRecovery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserNotificationsServer).PasswordRecovery(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserNotifications_PasswordRecovery_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserNotificationsServer).PasswordRecovery(ctx, req.(*User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// UserNotifications_ServiceDesc is the grpc.ServiceDesc for UserNotifications service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var UserNotifications_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "notifications.UserNotifications",
+	HandlerType: (*UserNotificationsServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "NotifyAboutReleaseOfNewChapterInTitle",
+			Handler:    _UserNotifications_NotifyAboutReleaseOfNewChapterInTitle_Handler,
+		},
+		{
+			MethodName: "PasswordRecovery",
+			Handler:    _UserNotifications_PasswordRecovery_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "notifications.proto",
+}
