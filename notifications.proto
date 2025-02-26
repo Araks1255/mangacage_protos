@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package service_notifications;
+package notifications;
 
-option go_package = "mangacage/protos/service_notifications";
+option go_package = "github.com/Araks1255/mangacage_protos";
 
 service ServiceNotifications {
     rpc NotifyAboutNewTitleOnModeration (TitleOnModeration) returns (Empty);
