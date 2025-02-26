@@ -4,12 +4,10 @@ package notifications;
 
 option go_package = "github.com/Araks1255/mangacage_protos";
 
-service ServiceNotifications {
+service Notifications {
     rpc NotifyAboutNewTitleOnModeration (TitleOnModeration) returns (Empty);
     rpc NotifyAboutNewChapterOnModeration (ChapterOnModeration) returns (Empty);
-}
 
-service UserNotifications {
     rpc NotifyAboutReleaseOfNewChapterInTitle (ReleasedChapter) returns (Empty);
     rpc PasswordRecovery (User) returns (Empty);
 }
@@ -23,11 +21,11 @@ message ChapterOnModeration {
     string ChapterName = 2;
 }
 
-message User {
+message ReleasedChapter {
     string Name = 1;
 }
 
-message ReleasedChapter {
+message User {
     string Name = 1;
 }
 

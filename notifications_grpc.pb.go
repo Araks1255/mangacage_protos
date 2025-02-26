@@ -19,279 +19,215 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ServiceNotifications_NotifyAboutNewTitleOnModeration_FullMethodName   = "/notifications.ServiceNotifications/NotifyAboutNewTitleOnModeration"
-	ServiceNotifications_NotifyAboutNewChapterOnModeration_FullMethodName = "/notifications.ServiceNotifications/NotifyAboutNewChapterOnModeration"
+	Notifications_NotifyAboutNewTitleOnModeration_FullMethodName       = "/notifications.Notifications/NotifyAboutNewTitleOnModeration"
+	Notifications_NotifyAboutNewChapterOnModeration_FullMethodName     = "/notifications.Notifications/NotifyAboutNewChapterOnModeration"
+	Notifications_NotifyAboutReleaseOfNewChapterInTitle_FullMethodName = "/notifications.Notifications/NotifyAboutReleaseOfNewChapterInTitle"
+	Notifications_PasswordRecovery_FullMethodName                      = "/notifications.Notifications/PasswordRecovery"
 )
 
-// ServiceNotificationsClient is the client API for ServiceNotifications service.
+// NotificationsClient is the client API for Notifications service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ServiceNotificationsClient interface {
+type NotificationsClient interface {
 	NotifyAboutNewTitleOnModeration(ctx context.Context, in *TitleOnModeration, opts ...grpc.CallOption) (*Empty, error)
 	NotifyAboutNewChapterOnModeration(ctx context.Context, in *ChapterOnModeration, opts ...grpc.CallOption) (*Empty, error)
+	NotifyAboutReleaseOfNewChapterInTitle(ctx context.Context, in *ReleasedChapter, opts ...grpc.CallOption) (*Empty, error)
+	PasswordRecovery(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error)
 }
 
-type serviceNotificationsClient struct {
+type notificationsClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewServiceNotificationsClient(cc grpc.ClientConnInterface) ServiceNotificationsClient {
-	return &serviceNotificationsClient{cc}
+func NewNotificationsClient(cc grpc.ClientConnInterface) NotificationsClient {
+	return &notificationsClient{cc}
 }
 
-func (c *serviceNotificationsClient) NotifyAboutNewTitleOnModeration(ctx context.Context, in *TitleOnModeration, opts ...grpc.CallOption) (*Empty, error) {
+func (c *notificationsClient) NotifyAboutNewTitleOnModeration(ctx context.Context, in *TitleOnModeration, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, ServiceNotifications_NotifyAboutNewTitleOnModeration_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Notifications_NotifyAboutNewTitleOnModeration_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serviceNotificationsClient) NotifyAboutNewChapterOnModeration(ctx context.Context, in *ChapterOnModeration, opts ...grpc.CallOption) (*Empty, error) {
+func (c *notificationsClient) NotifyAboutNewChapterOnModeration(ctx context.Context, in *ChapterOnModeration, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, ServiceNotifications_NotifyAboutNewChapterOnModeration_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Notifications_NotifyAboutNewChapterOnModeration_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ServiceNotificationsServer is the server API for ServiceNotifications service.
-// All implementations must embed UnimplementedServiceNotificationsServer
+func (c *notificationsClient) NotifyAboutReleaseOfNewChapterInTitle(ctx context.Context, in *ReleasedChapter, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, Notifications_NotifyAboutReleaseOfNewChapterInTitle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationsClient) PasswordRecovery(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, Notifications_PasswordRecovery_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// NotificationsServer is the server API for Notifications service.
+// All implementations must embed UnimplementedNotificationsServer
 // for forward compatibility.
-type ServiceNotificationsServer interface {
+type NotificationsServer interface {
 	NotifyAboutNewTitleOnModeration(context.Context, *TitleOnModeration) (*Empty, error)
 	NotifyAboutNewChapterOnModeration(context.Context, *ChapterOnModeration) (*Empty, error)
-	mustEmbedUnimplementedServiceNotificationsServer()
+	NotifyAboutReleaseOfNewChapterInTitle(context.Context, *ReleasedChapter) (*Empty, error)
+	PasswordRecovery(context.Context, *User) (*Empty, error)
+	mustEmbedUnimplementedNotificationsServer()
 }
 
-// UnimplementedServiceNotificationsServer must be embedded to have
+// UnimplementedNotificationsServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedServiceNotificationsServer struct{}
+type UnimplementedNotificationsServer struct{}
 
-func (UnimplementedServiceNotificationsServer) NotifyAboutNewTitleOnModeration(context.Context, *TitleOnModeration) (*Empty, error) {
+func (UnimplementedNotificationsServer) NotifyAboutNewTitleOnModeration(context.Context, *TitleOnModeration) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutNewTitleOnModeration not implemented")
 }
-func (UnimplementedServiceNotificationsServer) NotifyAboutNewChapterOnModeration(context.Context, *ChapterOnModeration) (*Empty, error) {
+func (UnimplementedNotificationsServer) NotifyAboutNewChapterOnModeration(context.Context, *ChapterOnModeration) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutNewChapterOnModeration not implemented")
 }
-func (UnimplementedServiceNotificationsServer) mustEmbedUnimplementedServiceNotificationsServer() {}
-func (UnimplementedServiceNotificationsServer) testEmbeddedByValue()                              {}
+func (UnimplementedNotificationsServer) NotifyAboutReleaseOfNewChapterInTitle(context.Context, *ReleasedChapter) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutReleaseOfNewChapterInTitle not implemented")
+}
+func (UnimplementedNotificationsServer) PasswordRecovery(context.Context, *User) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PasswordRecovery not implemented")
+}
+func (UnimplementedNotificationsServer) mustEmbedUnimplementedNotificationsServer() {}
+func (UnimplementedNotificationsServer) testEmbeddedByValue()                       {}
 
-// UnsafeServiceNotificationsServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ServiceNotificationsServer will
+// UnsafeNotificationsServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to NotificationsServer will
 // result in compilation errors.
-type UnsafeServiceNotificationsServer interface {
-	mustEmbedUnimplementedServiceNotificationsServer()
+type UnsafeNotificationsServer interface {
+	mustEmbedUnimplementedNotificationsServer()
 }
 
-func RegisterServiceNotificationsServer(s grpc.ServiceRegistrar, srv ServiceNotificationsServer) {
-	// If the following call pancis, it indicates UnimplementedServiceNotificationsServer was
+func RegisterNotificationsServer(s grpc.ServiceRegistrar, srv NotificationsServer) {
+	// If the following call pancis, it indicates UnimplementedNotificationsServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ServiceNotifications_ServiceDesc, srv)
+	s.RegisterService(&Notifications_ServiceDesc, srv)
 }
 
-func _ServiceNotifications_NotifyAboutNewTitleOnModeration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Notifications_NotifyAboutNewTitleOnModeration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TitleOnModeration)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceNotificationsServer).NotifyAboutNewTitleOnModeration(ctx, in)
+		return srv.(NotificationsServer).NotifyAboutNewTitleOnModeration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ServiceNotifications_NotifyAboutNewTitleOnModeration_FullMethodName,
+		FullMethod: Notifications_NotifyAboutNewTitleOnModeration_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceNotificationsServer).NotifyAboutNewTitleOnModeration(ctx, req.(*TitleOnModeration))
+		return srv.(NotificationsServer).NotifyAboutNewTitleOnModeration(ctx, req.(*TitleOnModeration))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ServiceNotifications_NotifyAboutNewChapterOnModeration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Notifications_NotifyAboutNewChapterOnModeration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChapterOnModeration)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceNotificationsServer).NotifyAboutNewChapterOnModeration(ctx, in)
+		return srv.(NotificationsServer).NotifyAboutNewChapterOnModeration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ServiceNotifications_NotifyAboutNewChapterOnModeration_FullMethodName,
+		FullMethod: Notifications_NotifyAboutNewChapterOnModeration_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceNotificationsServer).NotifyAboutNewChapterOnModeration(ctx, req.(*ChapterOnModeration))
+		return srv.(NotificationsServer).NotifyAboutNewChapterOnModeration(ctx, req.(*ChapterOnModeration))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ServiceNotifications_ServiceDesc is the grpc.ServiceDesc for ServiceNotifications service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ServiceNotifications_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "notifications.ServiceNotifications",
-	HandlerType: (*ServiceNotificationsServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "NotifyAboutNewTitleOnModeration",
-			Handler:    _ServiceNotifications_NotifyAboutNewTitleOnModeration_Handler,
-		},
-		{
-			MethodName: "NotifyAboutNewChapterOnModeration",
-			Handler:    _ServiceNotifications_NotifyAboutNewChapterOnModeration_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "notifications.proto",
-}
-
-const (
-	UserNotifications_NotifyAboutReleaseOfNewChapterInTitle_FullMethodName = "/notifications.UserNotifications/NotifyAboutReleaseOfNewChapterInTitle"
-	UserNotifications_PasswordRecovery_FullMethodName                      = "/notifications.UserNotifications/PasswordRecovery"
-)
-
-// UserNotificationsClient is the client API for UserNotifications service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UserNotificationsClient interface {
-	NotifyAboutReleaseOfNewChapterInTitle(ctx context.Context, in *ReleasedChapter, opts ...grpc.CallOption) (*Empty, error)
-	PasswordRecovery(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error)
-}
-
-type userNotificationsClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewUserNotificationsClient(cc grpc.ClientConnInterface) UserNotificationsClient {
-	return &userNotificationsClient{cc}
-}
-
-func (c *userNotificationsClient) NotifyAboutReleaseOfNewChapterInTitle(ctx context.Context, in *ReleasedChapter, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, UserNotifications_NotifyAboutReleaseOfNewChapterInTitle_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userNotificationsClient) PasswordRecovery(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, UserNotifications_PasswordRecovery_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// UserNotificationsServer is the server API for UserNotifications service.
-// All implementations must embed UnimplementedUserNotificationsServer
-// for forward compatibility.
-type UserNotificationsServer interface {
-	NotifyAboutReleaseOfNewChapterInTitle(context.Context, *ReleasedChapter) (*Empty, error)
-	PasswordRecovery(context.Context, *User) (*Empty, error)
-	mustEmbedUnimplementedUserNotificationsServer()
-}
-
-// UnimplementedUserNotificationsServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedUserNotificationsServer struct{}
-
-func (UnimplementedUserNotificationsServer) NotifyAboutReleaseOfNewChapterInTitle(context.Context, *ReleasedChapter) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutReleaseOfNewChapterInTitle not implemented")
-}
-func (UnimplementedUserNotificationsServer) PasswordRecovery(context.Context, *User) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PasswordRecovery not implemented")
-}
-func (UnimplementedUserNotificationsServer) mustEmbedUnimplementedUserNotificationsServer() {}
-func (UnimplementedUserNotificationsServer) testEmbeddedByValue()                           {}
-
-// UnsafeUserNotificationsServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UserNotificationsServer will
-// result in compilation errors.
-type UnsafeUserNotificationsServer interface {
-	mustEmbedUnimplementedUserNotificationsServer()
-}
-
-func RegisterUserNotificationsServer(s grpc.ServiceRegistrar, srv UserNotificationsServer) {
-	// If the following call pancis, it indicates UnimplementedUserNotificationsServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&UserNotifications_ServiceDesc, srv)
-}
-
-func _UserNotifications_NotifyAboutReleaseOfNewChapterInTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Notifications_NotifyAboutReleaseOfNewChapterInTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReleasedChapter)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserNotificationsServer).NotifyAboutReleaseOfNewChapterInTitle(ctx, in)
+		return srv.(NotificationsServer).NotifyAboutReleaseOfNewChapterInTitle(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserNotifications_NotifyAboutReleaseOfNewChapterInTitle_FullMethodName,
+		FullMethod: Notifications_NotifyAboutReleaseOfNewChapterInTitle_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserNotificationsServer).NotifyAboutReleaseOfNewChapterInTitle(ctx, req.(*ReleasedChapter))
+		return srv.(NotificationsServer).NotifyAboutReleaseOfNewChapterInTitle(ctx, req.(*ReleasedChapter))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserNotifications_PasswordRecovery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Notifications_PasswordRecovery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(User)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserNotificationsServer).PasswordRecovery(ctx, in)
+		return srv.(NotificationsServer).PasswordRecovery(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserNotifications_PasswordRecovery_FullMethodName,
+		FullMethod: Notifications_PasswordRecovery_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserNotificationsServer).PasswordRecovery(ctx, req.(*User))
+		return srv.(NotificationsServer).PasswordRecovery(ctx, req.(*User))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// UserNotifications_ServiceDesc is the grpc.ServiceDesc for UserNotifications service.
+// Notifications_ServiceDesc is the grpc.ServiceDesc for Notifications service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var UserNotifications_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "notifications.UserNotifications",
-	HandlerType: (*UserNotificationsServer)(nil),
+var Notifications_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "notifications.Notifications",
+	HandlerType: (*NotificationsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "NotifyAboutNewTitleOnModeration",
+			Handler:    _Notifications_NotifyAboutNewTitleOnModeration_Handler,
+		},
+		{
+			MethodName: "NotifyAboutNewChapterOnModeration",
+			Handler:    _Notifications_NotifyAboutNewChapterOnModeration_Handler,
+		},
+		{
 			MethodName: "NotifyAboutReleaseOfNewChapterInTitle",
-			Handler:    _UserNotifications_NotifyAboutReleaseOfNewChapterInTitle_Handler,
+			Handler:    _Notifications_NotifyAboutReleaseOfNewChapterInTitle_Handler,
 		},
 		{
 			MethodName: "PasswordRecovery",
-			Handler:    _UserNotifications_PasswordRecovery_Handler,
+			Handler:    _Notifications_PasswordRecovery_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
