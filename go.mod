@@ -1,4 +1,4 @@
-module github.com/Araks1255/mangacage_service_protos
+module github.com/Araks1255/mangacage_protos
 
 go 1.23.4
 
