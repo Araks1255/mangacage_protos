@@ -22,7 +22,7 @@ const (
 	Notifications_NotifyAboutNewTitleOnModeration_FullMethodName       = "/notifications.Notifications/NotifyAboutNewTitleOnModeration"
 	Notifications_NotifyAboutNewChapterOnModeration_FullMethodName     = "/notifications.Notifications/NotifyAboutNewChapterOnModeration"
 	Notifications_NotifyAboutReleaseOfNewChapterInTitle_FullMethodName = "/notifications.Notifications/NotifyAboutReleaseOfNewChapterInTitle"
-	Notifications_PasswordRecovery_FullMethodName                      = "/notifications.Notifications/PasswordRecovery"
+	Notifications_SendPromocode_FullMethodName                         = "/notifications.Notifications/SendPromocode"
 )
 
 // NotificationsClient is the client API for Notifications service.
@@ -32,7 +32,7 @@ type NotificationsClient interface {
 	NotifyAboutNewTitleOnModeration(ctx context.Context, in *TitleOnModeration, opts ...grpc.CallOption) (*Empty, error)
 	NotifyAboutNewChapterOnModeration(ctx context.Context, in *ChapterOnModeration, opts ...grpc.CallOption) (*Empty, error)
 	NotifyAboutReleaseOfNewChapterInTitle(ctx context.Context, in *ReleasedChapter, opts ...grpc.CallOption) (*Empty, error)
-	PasswordRecovery(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error)
+	SendPromocode(ctx context.Context, in *PromocodeRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type notificationsClient struct {
@@ -73,10 +73,10 @@ func (c *notificationsClient) NotifyAboutReleaseOfNewChapterInTitle(ctx context.
 	return out, nil
 }
 
-func (c *notificationsClient) PasswordRecovery(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error) {
+func (c *notificationsClient) SendPromocode(ctx context.Context, in *PromocodeRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, Notifications_PasswordRecovery_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Notifications_SendPromocode_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type NotificationsServer interface {
 	NotifyAboutNewTitleOnModeration(context.Context, *TitleOnModeration) (*Empty, error)
 	NotifyAboutNewChapterOnModeration(context.Context, *ChapterOnModeration) (*Empty, error)
 	NotifyAboutReleaseOfNewChapterInTitle(context.Context, *ReleasedChapter) (*Empty, error)
-	PasswordRecovery(context.Context, *User) (*Empty, error)
+	SendPromocode(context.Context, *PromocodeRequest) (*Empty, error)
 	mustEmbedUnimplementedNotificationsServer()
 }
 
@@ -110,8 +110,8 @@ func (UnimplementedNotificationsServer) NotifyAboutNewChapterOnModeration(contex
 func (UnimplementedNotificationsServer) NotifyAboutReleaseOfNewChapterInTitle(context.Context, *ReleasedChapter) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutReleaseOfNewChapterInTitle not implemented")
 }
-func (UnimplementedNotificationsServer) PasswordRecovery(context.Context, *User) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PasswordRecovery not implemented")
+func (UnimplementedNotificationsServer) SendPromocode(context.Context, *PromocodeRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendPromocode not implemented")
 }
 func (UnimplementedNotificationsServer) mustEmbedUnimplementedNotificationsServer() {}
 func (UnimplementedNotificationsServer) testEmbeddedByValue()                       {}
@@ -188,20 +188,20 @@ func _Notifications_NotifyAboutReleaseOfNewChapterInTitle_Handler(srv interface{
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Notifications_PasswordRecovery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(User)
+func _Notifications_SendPromocode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PromocodeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NotificationsServer).PasswordRecovery(ctx, in)
+		return srv.(NotificationsServer).SendPromocode(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Notifications_PasswordRecovery_FullMethodName,
+		FullMethod: Notifications_SendPromocode_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationsServer).PasswordRecovery(ctx, req.(*User))
+		return srv.(NotificationsServer).SendPromocode(ctx, req.(*PromocodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -226,8 +226,8 @@ var Notifications_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Notifications_NotifyAboutReleaseOfNewChapterInTitle_Handler,
 		},
 		{
-			MethodName: "PasswordRecovery",
-			Handler:    _Notifications_PasswordRecovery_Handler,
+			MethodName: "SendPromocode",
+			Handler:    _Notifications_SendPromocode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

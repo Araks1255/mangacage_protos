@@ -9,7 +9,7 @@ service Notifications {
     rpc NotifyAboutNewChapterOnModeration (ChapterOnModeration) returns (Empty);
 
     rpc NotifyAboutReleaseOfNewChapterInTitle (ReleasedChapter) returns (Empty);
-    rpc PasswordRecovery (User) returns (Empty);
+    rpc SendPromocode (PromocodeRequest) returns (Empty);
 }
 
 message TitleOnModeration {
@@ -27,6 +27,11 @@ message ReleasedChapter {
 
 message User {
     string Name = 1;
+}
+
+message PromocodeRequest {
+    string Code = 1;
+    User User = 2;
 }
 
 message Empty {}
