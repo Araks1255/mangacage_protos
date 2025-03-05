@@ -12,6 +12,20 @@ service Notifications {
     rpc SendPromocode (PromocodeRequest) returns (Empty);
 }
 
+message PromocodeRequest {
+    Promocode Promocode = 1;
+    User User = 2;
+}
+
+message Promocode {
+    string Code = 1;
+    string Amount = 2;
+}
+
+message User {
+    string Name = 1;
+}
+
 message TitleOnModeration {
     string TitleName = 1;
 }
@@ -23,20 +37,6 @@ message ChapterOnModeration {
 
 message ReleasedChapter {
     string Name = 1;
-}
-
-message User {
-    string Name = 1;
-}
-
-message Promocode {
-    string Code = 1;
-    string Amount = 2;
-}
-
-message PromocodeRequest {
-    Promocode Promocode = 1;
-    User User = 2;
 }
 
 message Empty {}

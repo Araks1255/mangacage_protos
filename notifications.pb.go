@@ -21,6 +21,154 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type PromocodeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Promocode     *Promocode             `protobuf:"bytes,1,opt,name=Promocode,proto3" json:"Promocode,omitempty"`
+	User          *User                  `protobuf:"bytes,2,opt,name=User,proto3" json:"User,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PromocodeRequest) Reset() {
+	*x = PromocodeRequest{}
+	mi := &file_notifications_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PromocodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PromocodeRequest) ProtoMessage() {}
+
+func (x *PromocodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_notifications_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PromocodeRequest.ProtoReflect.Descriptor instead.
+func (*PromocodeRequest) Descriptor() ([]byte, []int) {
+	return file_notifications_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *PromocodeRequest) GetPromocode() *Promocode {
+	if x != nil {
+		return x.Promocode
+	}
+	return nil
+}
+
+func (x *PromocodeRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type Promocode struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=Code,proto3" json:"Code,omitempty"`
+	Amount        string                 `protobuf:"bytes,2,opt,name=Amount,proto3" json:"Amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Promocode) Reset() {
+	*x = Promocode{}
+	mi := &file_notifications_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Promocode) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Promocode) ProtoMessage() {}
+
+func (x *Promocode) ProtoReflect() protoreflect.Message {
+	mi := &file_notifications_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Promocode.ProtoReflect.Descriptor instead.
+func (*Promocode) Descriptor() ([]byte, []int) {
+	return file_notifications_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Promocode) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *Promocode) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+type User struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=Name,proto3" json:"Name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *User) Reset() {
+	*x = User{}
+	mi := &file_notifications_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*User) ProtoMessage() {}
+
+func (x *User) ProtoReflect() protoreflect.Message {
+	mi := &file_notifications_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use User.ProtoReflect.Descriptor instead.
+func (*User) Descriptor() ([]byte, []int) {
+	return file_notifications_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *User) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 type TitleOnModeration struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TitleName     string                 `protobuf:"bytes,1,opt,name=TitleName,proto3" json:"TitleName,omitempty"`
@@ -30,7 +178,7 @@ type TitleOnModeration struct {
 
 func (x *TitleOnModeration) Reset() {
 	*x = TitleOnModeration{}
-	mi := &file_notifications_proto_msgTypes[0]
+	mi := &file_notifications_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +190,7 @@ func (x *TitleOnModeration) String() string {
 func (*TitleOnModeration) ProtoMessage() {}
 
 func (x *TitleOnModeration) ProtoReflect() protoreflect.Message {
-	mi := &file_notifications_proto_msgTypes[0]
+	mi := &file_notifications_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +203,7 @@ func (x *TitleOnModeration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TitleOnModeration.ProtoReflect.Descriptor instead.
 func (*TitleOnModeration) Descriptor() ([]byte, []int) {
-	return file_notifications_proto_rawDescGZIP(), []int{0}
+	return file_notifications_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *TitleOnModeration) GetTitleName() string {
@@ -75,7 +223,7 @@ type ChapterOnModeration struct {
 
 func (x *ChapterOnModeration) Reset() {
 	*x = ChapterOnModeration{}
-	mi := &file_notifications_proto_msgTypes[1]
+	mi := &file_notifications_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +235,7 @@ func (x *ChapterOnModeration) String() string {
 func (*ChapterOnModeration) ProtoMessage() {}
 
 func (x *ChapterOnModeration) ProtoReflect() protoreflect.Message {
-	mi := &file_notifications_proto_msgTypes[1]
+	mi := &file_notifications_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +248,7 @@ func (x *ChapterOnModeration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChapterOnModeration.ProtoReflect.Descriptor instead.
 func (*ChapterOnModeration) Descriptor() ([]byte, []int) {
-	return file_notifications_proto_rawDescGZIP(), []int{1}
+	return file_notifications_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ChapterOnModeration) GetTitleName() string {
@@ -126,7 +274,7 @@ type ReleasedChapter struct {
 
 func (x *ReleasedChapter) Reset() {
 	*x = ReleasedChapter{}
-	mi := &file_notifications_proto_msgTypes[2]
+	mi := &file_notifications_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -138,7 +286,7 @@ func (x *ReleasedChapter) String() string {
 func (*ReleasedChapter) ProtoMessage() {}
 
 func (x *ReleasedChapter) ProtoReflect() protoreflect.Message {
-	mi := &file_notifications_proto_msgTypes[2]
+	mi := &file_notifications_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -151,7 +299,7 @@ func (x *ReleasedChapter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReleasedChapter.ProtoReflect.Descriptor instead.
 func (*ReleasedChapter) Descriptor() ([]byte, []int) {
-	return file_notifications_proto_rawDescGZIP(), []int{2}
+	return file_notifications_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ReleasedChapter) GetName() string {
@@ -159,154 +307,6 @@ func (x *ReleasedChapter) GetName() string {
 		return x.Name
 	}
 	return ""
-}
-
-type User struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=Name,proto3" json:"Name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *User) Reset() {
-	*x = User{}
-	mi := &file_notifications_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *User) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*User) ProtoMessage() {}
-
-func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_notifications_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use User.ProtoReflect.Descriptor instead.
-func (*User) Descriptor() ([]byte, []int) {
-	return file_notifications_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *User) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-type Promocode struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          string                 `protobuf:"bytes,1,opt,name=Code,proto3" json:"Code,omitempty"`
-	Amount        string                 `protobuf:"bytes,2,opt,name=Amount,proto3" json:"Amount,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Promocode) Reset() {
-	*x = Promocode{}
-	mi := &file_notifications_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Promocode) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Promocode) ProtoMessage() {}
-
-func (x *Promocode) ProtoReflect() protoreflect.Message {
-	mi := &file_notifications_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Promocode.ProtoReflect.Descriptor instead.
-func (*Promocode) Descriptor() ([]byte, []int) {
-	return file_notifications_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *Promocode) GetCode() string {
-	if x != nil {
-		return x.Code
-	}
-	return ""
-}
-
-func (x *Promocode) GetAmount() string {
-	if x != nil {
-		return x.Amount
-	}
-	return ""
-}
-
-type PromocodeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Promocode     *Promocode             `protobuf:"bytes,1,opt,name=Promocode,proto3" json:"Promocode,omitempty"`
-	User          *User                  `protobuf:"bytes,2,opt,name=User,proto3" json:"User,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PromocodeRequest) Reset() {
-	*x = PromocodeRequest{}
-	mi := &file_notifications_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PromocodeRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PromocodeRequest) ProtoMessage() {}
-
-func (x *PromocodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_notifications_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PromocodeRequest.ProtoReflect.Descriptor instead.
-func (*PromocodeRequest) Descriptor() ([]byte, []int) {
-	return file_notifications_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *PromocodeRequest) GetPromocode() *Promocode {
-	if x != nil {
-		return x.Promocode
-	}
-	return nil
-}
-
-func (x *PromocodeRequest) GetUser() *User {
-	if x != nil {
-		return x.User
-	}
-	return nil
 }
 
 type Empty struct {
@@ -350,30 +350,30 @@ var File_notifications_proto protoreflect.FileDescriptor
 var file_notifications_proto_rawDesc = string([]byte{
 	0x0a, 0x13, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0d, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x73, 0x22, 0x31, 0x0a, 0x11, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x4f, 0x6e, 0x4d,
-	0x6f, 0x64, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1c, 0x0a, 0x09, 0x54, 0x69, 0x74,
-	0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x54, 0x69,
-	0x74, 0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x55, 0x0a, 0x13, 0x43, 0x68, 0x61, 0x70, 0x74,
-	0x65, 0x72, 0x4f, 0x6e, 0x4d, 0x6f, 0x64, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1c,
-	0x0a, 0x09, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x09, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b,
-	0x43, 0x68, 0x61, 0x70, 0x74, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x0b, 0x43, 0x68, 0x61, 0x70, 0x74, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x25,
-	0x0a, 0x0f, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x64, 0x43, 0x68, 0x61, 0x70, 0x74, 0x65,
-	0x72, 0x12, 0x12, 0x0a, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x04, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x1a, 0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x12, 0x12, 0x0a,
-	0x04, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d,
-	0x65, 0x22, 0x37, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x12,
-	0x0a, 0x04, 0x43, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x43, 0x6f,
-	0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x06, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x73, 0x0a, 0x10, 0x50, 0x72,
-	0x6f, 0x6d, 0x6f, 0x63, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x36,
-	0x0a, 0x09, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x18, 0x2e, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x73, 0x2e, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x63, 0x6f, 0x64, 0x65, 0x52, 0x09, 0x50, 0x72, 0x6f,
-	0x6d, 0x6f, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x27, 0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x55, 0x73, 0x65, 0x72, 0x22,
+	0x69, 0x6f, 0x6e, 0x73, 0x22, 0x73, 0x0a, 0x10, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x63, 0x6f, 0x64,
+	0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x36, 0x0a, 0x09, 0x50, 0x72, 0x6f, 0x6d,
+	0x6f, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6e, 0x6f,
+	0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x50, 0x72, 0x6f, 0x6d,
+	0x6f, 0x63, 0x6f, 0x64, 0x65, 0x52, 0x09, 0x50, 0x72, 0x6f, 0x6d, 0x6f, 0x63, 0x6f, 0x64, 0x65,
+	0x12, 0x27, 0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13,
+	0x2e, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x55,
+	0x73, 0x65, 0x72, 0x52, 0x04, 0x55, 0x73, 0x65, 0x72, 0x22, 0x37, 0x0a, 0x09, 0x50, 0x72, 0x6f,
+	0x6d, 0x6f, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x43, 0x6f, 0x64, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x41, 0x6d,
+	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x41, 0x6d, 0x6f, 0x75,
+	0x6e, 0x74, 0x22, 0x1a, 0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x4e, 0x61,
+	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x31,
+	0x0a, 0x11, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x4f, 0x6e, 0x4d, 0x6f, 0x64, 0x65, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x12, 0x1c, 0x0a, 0x09, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x4e, 0x61, 0x6d,
+	0x65, 0x22, 0x55, 0x0a, 0x13, 0x43, 0x68, 0x61, 0x70, 0x74, 0x65, 0x72, 0x4f, 0x6e, 0x4d, 0x6f,
+	0x64, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1c, 0x0a, 0x09, 0x54, 0x69, 0x74, 0x6c,
+	0x65, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x54, 0x69, 0x74,
+	0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x43, 0x68, 0x61, 0x70, 0x74, 0x65,
+	0x72, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x43, 0x68, 0x61,
+	0x70, 0x74, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x25, 0x0a, 0x0f, 0x52, 0x65, 0x6c, 0x65,
+	0x61, 0x73, 0x65, 0x64, 0x43, 0x68, 0x61, 0x70, 0x74, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x4e,
+	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x22,
 	0x07, 0x0a, 0x05, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x32, 0xf0, 0x02, 0x0a, 0x0d, 0x4e, 0x6f, 0x74,
 	0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x59, 0x0a, 0x1f, 0x4e, 0x6f,
 	0x74, 0x69, 0x66, 0x79, 0x41, 0x62, 0x6f, 0x75, 0x74, 0x4e, 0x65, 0x77, 0x54, 0x69, 0x74, 0x6c,
@@ -417,21 +417,21 @@ func file_notifications_proto_rawDescGZIP() []byte {
 
 var file_notifications_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_notifications_proto_goTypes = []any{
-	(*TitleOnModeration)(nil),   // 0: notifications.TitleOnModeration
-	(*ChapterOnModeration)(nil), // 1: notifications.ChapterOnModeration
-	(*ReleasedChapter)(nil),     // 2: notifications.ReleasedChapter
-	(*User)(nil),                // 3: notifications.User
-	(*Promocode)(nil),           // 4: notifications.Promocode
-	(*PromocodeRequest)(nil),    // 5: notifications.PromocodeRequest
+	(*PromocodeRequest)(nil),    // 0: notifications.PromocodeRequest
+	(*Promocode)(nil),           // 1: notifications.Promocode
+	(*User)(nil),                // 2: notifications.User
+	(*TitleOnModeration)(nil),   // 3: notifications.TitleOnModeration
+	(*ChapterOnModeration)(nil), // 4: notifications.ChapterOnModeration
+	(*ReleasedChapter)(nil),     // 5: notifications.ReleasedChapter
 	(*Empty)(nil),               // 6: notifications.Empty
 }
 var file_notifications_proto_depIdxs = []int32{
-	4, // 0: notifications.PromocodeRequest.Promocode:type_name -> notifications.Promocode
-	3, // 1: notifications.PromocodeRequest.User:type_name -> notifications.User
-	0, // 2: notifications.Notifications.NotifyAboutNewTitleOnModeration:input_type -> notifications.TitleOnModeration
-	1, // 3: notifications.Notifications.NotifyAboutNewChapterOnModeration:input_type -> notifications.ChapterOnModeration
-	2, // 4: notifications.Notifications.NotifyAboutReleaseOfNewChapterInTitle:input_type -> notifications.ReleasedChapter
-	5, // 5: notifications.Notifications.SendPromocode:input_type -> notifications.PromocodeRequest
+	1, // 0: notifications.PromocodeRequest.Promocode:type_name -> notifications.Promocode
+	2, // 1: notifications.PromocodeRequest.User:type_name -> notifications.User
+	3, // 2: notifications.Notifications.NotifyAboutNewTitleOnModeration:input_type -> notifications.TitleOnModeration
+	4, // 3: notifications.Notifications.NotifyAboutNewChapterOnModeration:input_type -> notifications.ChapterOnModeration
+	5, // 4: notifications.Notifications.NotifyAboutReleaseOfNewChapterInTitle:input_type -> notifications.ReleasedChapter
+	0, // 5: notifications.Notifications.SendPromocode:input_type -> notifications.PromocodeRequest
 	6, // 6: notifications.Notifications.NotifyAboutNewTitleOnModeration:output_type -> notifications.Empty
 	6, // 7: notifications.Notifications.NotifyAboutNewChapterOnModeration:output_type -> notifications.Empty
 	6, // 8: notifications.Notifications.NotifyAboutReleaseOfNewChapterInTitle:output_type -> notifications.Empty
