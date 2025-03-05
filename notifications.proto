@@ -29,8 +29,13 @@ message User {
     string Name = 1;
 }
 
-message PromocodeRequest {
+message Promocode {
     string Code = 1;
+    string Amount = 2;
+}
+
+message PromocodeRequest {
+    Promocode Promocode = 1;
     User User = 2;
 }
 
