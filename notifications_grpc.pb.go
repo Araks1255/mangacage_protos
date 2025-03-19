@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Notifications_NotifyAboutNewTitleOnModeration_FullMethodName       = "/notifications.Notifications/NotifyAboutNewTitleOnModeration"
-	Notifications_NotifyAboutNewChapterOnModeration_FullMethodName     = "/notifications.Notifications/NotifyAboutNewChapterOnModeration"
+	Notifications_NotifyAboutTitleOnModeration_FullMethodName          = "/notifications.Notifications/NotifyAboutTitleOnModeration"
+	Notifications_NotifyAboutChapterOnModeration_FullMethodName        = "/notifications.Notifications/NotifyAboutChapterOnModeration"
+	Notifications_NotifyAboutUser_FullMethodName                       = "/notifications.Notifications/NotifyAboutUser"
 	Notifications_NotifyAboutReleaseOfNewChapterInTitle_FullMethodName = "/notifications.Notifications/NotifyAboutReleaseOfNewChapterInTitle"
 	Notifications_SendPromocode_FullMethodName                         = "/notifications.Notifications/SendPromocode"
 )
@@ -29,8 +30,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NotificationsClient interface {
-	NotifyAboutNewTitleOnModeration(ctx context.Context, in *TitleOnModeration, opts ...grpc.CallOption) (*Empty, error)
-	NotifyAboutNewChapterOnModeration(ctx context.Context, in *ChapterOnModeration, opts ...grpc.CallOption) (*Empty, error)
+	NotifyAboutTitleOnModeration(ctx context.Context, in *TitleOnModeration, opts ...grpc.CallOption) (*Empty, error)
+	NotifyAboutChapterOnModeration(ctx context.Context, in *ChapterOnModeration, opts ...grpc.CallOption) (*Empty, error)
+	NotifyAboutUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error)
 	NotifyAboutReleaseOfNewChapterInTitle(ctx context.Context, in *ReleasedChapter, opts ...grpc.CallOption) (*Empty, error)
 	SendPromocode(ctx context.Context, in *PromocodeRequest, opts ...grpc.CallOption) (*Empty, error)
 }
@@ -43,20 +45,30 @@ func NewNotificationsClient(cc grpc.ClientConnInterface) NotificationsClient {
 	return &notificationsClient{cc}
 }
 
-func (c *notificationsClient) NotifyAboutNewTitleOnModeration(ctx context.Context, in *TitleOnModeration, opts ...grpc.CallOption) (*Empty, error) {
+func (c *notificationsClient) NotifyAboutTitleOnModeration(ctx context.Context, in *TitleOnModeration, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, Notifications_NotifyAboutNewTitleOnModeration_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Notifications_NotifyAboutTitleOnModeration_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *notificationsClient) NotifyAboutNewChapterOnModeration(ctx context.Context, in *ChapterOnModeration, opts ...grpc.CallOption) (*Empty, error) {
+func (c *notificationsClient) NotifyAboutChapterOnModeration(ctx context.Context, in *ChapterOnModeration, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, Notifications_NotifyAboutNewChapterOnModeration_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Notifications_NotifyAboutChapterOnModeration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationsClient) NotifyAboutUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, Notifications_NotifyAboutUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -87,8 +99,9 @@ func (c *notificationsClient) SendPromocode(ctx context.Context, in *PromocodeRe
 // All implementations must embed UnimplementedNotificationsServer
 // for forward compatibility.
 type NotificationsServer interface {
-	NotifyAboutNewTitleOnModeration(context.Context, *TitleOnModeration) (*Empty, error)
-	NotifyAboutNewChapterOnModeration(context.Context, *ChapterOnModeration) (*Empty, error)
+	NotifyAboutTitleOnModeration(context.Context, *TitleOnModeration) (*Empty, error)
+	NotifyAboutChapterOnModeration(context.Context, *ChapterOnModeration) (*Empty, error)
+	NotifyAboutUser(context.Context, *User) (*Empty, error)
 	NotifyAboutReleaseOfNewChapterInTitle(context.Context, *ReleasedChapter) (*Empty, error)
 	SendPromocode(context.Context, *PromocodeRequest) (*Empty, error)
 	mustEmbedUnimplementedNotificationsServer()
@@ -101,11 +114,14 @@ type NotificationsServer interface {
 // pointer dereference when methods are called.
 type UnimplementedNotificationsServer struct{}
 
-func (UnimplementedNotificationsServer) NotifyAboutNewTitleOnModeration(context.Context, *TitleOnModeration) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutNewTitleOnModeration not implemented")
+func (UnimplementedNotificationsServer) NotifyAboutTitleOnModeration(context.Context, *TitleOnModeration) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutTitleOnModeration not implemented")
 }
-func (UnimplementedNotificationsServer) NotifyAboutNewChapterOnModeration(context.Context, *ChapterOnModeration) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutNewChapterOnModeration not implemented")
+func (UnimplementedNotificationsServer) NotifyAboutChapterOnModeration(context.Context, *ChapterOnModeration) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutChapterOnModeration not implemented")
+}
+func (UnimplementedNotificationsServer) NotifyAboutUser(context.Context, *User) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutUser not implemented")
 }
 func (UnimplementedNotificationsServer) NotifyAboutReleaseOfNewChapterInTitle(context.Context, *ReleasedChapter) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutReleaseOfNewChapterInTitle not implemented")
@@ -134,38 +150,56 @@ func RegisterNotificationsServer(s grpc.ServiceRegistrar, srv NotificationsServe
 	s.RegisterService(&Notifications_ServiceDesc, srv)
 }
 
-func _Notifications_NotifyAboutNewTitleOnModeration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Notifications_NotifyAboutTitleOnModeration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TitleOnModeration)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NotificationsServer).NotifyAboutNewTitleOnModeration(ctx, in)
+		return srv.(NotificationsServer).NotifyAboutTitleOnModeration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Notifications_NotifyAboutNewTitleOnModeration_FullMethodName,
+		FullMethod: Notifications_NotifyAboutTitleOnModeration_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationsServer).NotifyAboutNewTitleOnModeration(ctx, req.(*TitleOnModeration))
+		return srv.(NotificationsServer).NotifyAboutTitleOnModeration(ctx, req.(*TitleOnModeration))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Notifications_NotifyAboutNewChapterOnModeration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Notifications_NotifyAboutChapterOnModeration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChapterOnModeration)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NotificationsServer).NotifyAboutNewChapterOnModeration(ctx, in)
+		return srv.(NotificationsServer).NotifyAboutChapterOnModeration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Notifications_NotifyAboutNewChapterOnModeration_FullMethodName,
+		FullMethod: Notifications_NotifyAboutChapterOnModeration_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationsServer).NotifyAboutNewChapterOnModeration(ctx, req.(*ChapterOnModeration))
+		return srv.(NotificationsServer).NotifyAboutChapterOnModeration(ctx, req.(*ChapterOnModeration))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Notifications_NotifyAboutUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationsServer).NotifyAboutUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Notifications_NotifyAboutUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationsServer).NotifyAboutUser(ctx, req.(*User))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -214,12 +248,16 @@ var Notifications_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*NotificationsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "NotifyAboutNewTitleOnModeration",
-			Handler:    _Notifications_NotifyAboutNewTitleOnModeration_Handler,
+			MethodName: "NotifyAboutTitleOnModeration",
+			Handler:    _Notifications_NotifyAboutTitleOnModeration_Handler,
 		},
 		{
-			MethodName: "NotifyAboutNewChapterOnModeration",
-			Handler:    _Notifications_NotifyAboutNewChapterOnModeration_Handler,
+			MethodName: "NotifyAboutChapterOnModeration",
+			Handler:    _Notifications_NotifyAboutChapterOnModeration_Handler,
+		},
+		{
+			MethodName: "NotifyAboutUser",
+			Handler:    _Notifications_NotifyAboutUser_Handler,
 		},
 		{
 			MethodName: "NotifyAboutReleaseOfNewChapterInTitle",
