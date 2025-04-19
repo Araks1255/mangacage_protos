@@ -19,27 +19,27 @@ service Notifications {
 }
 
 message TitleOnModeration {
-    string Name = 1;
+    uint64 ID = 1;
     bool New = 2;
 }
 
 message VolumeOnModeration {
-    string Name = 1;
+    uint64 ID = 1;
     bool New = 2;
 }
 
 message ChapterOnModeration {
-    string Name = 1;
+    uint64 ID = 1;
     bool New = 2;
 }
 
 message User {
-    string Name = 1;
+    uint64 ID = 1;
     bool New = 2;
 }
 
 message ReleasedChapter {
-    uint32 ID = 1;
+    uint64 ID = 1;
 }
 
 message Empty {}
