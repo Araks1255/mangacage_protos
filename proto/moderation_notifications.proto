@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package moderation_notifications;
+
+import "enums.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/Araks1255/mangacage_protos/gen/moderation_notifications";
+
+service ModerationNotifications {
+    rpc NotifyAboutApprovedModerationRequest (ApprovedEntity) returns (google.protobuf.Empty);
+    
+    rpc NotifyAboutNewChapterInTitle (Chapter) returns (google.protobuf.Empty);
+    rpc SendMessageToUser (MessageFromModerator) returns (google.protobuf.Empty);
+    rpc SendModerationRequestDeclineReason (ModerationRequestDeclineReason) returns (google.protobuf.Empty);
+}
+
+message MessageFromModerator {
+    uint64 ReceiverID = 1;
+    enums.EntityOnModeration EntityOnModeration = 2;
+    string Text = 3 ;
+}
+
+message ModerationRequestDeclineReason {
+    uint64 CreatorID = 1;
+    enums.EntityOnModeration EntityOnModeration = 2;
+    string Reason = 3;
+}
+
+message ApprovedEntity {
+    enums.Entity Entity = 1;
+    uint64 ID = 2;
+    uint64 CreatorID = 3;
+}
+
+message Chapter {
+    uint64 ID = 1;
+}

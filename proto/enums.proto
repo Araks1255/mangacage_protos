@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package enums;
+
+option go_package = "github.com/Araks1255/mangacage_protos/gen/enums";
+
+enum Entity {
+    ENTITY_UNDEFINED = 0;
+    ENTITY_TITLE = 1;
+    ENTITY_CHAPTER = 2;
+    ENTITY_TEAM = 3;
+    ENTITY_PROFILE = 4;
+    ENTITY_AUTHOR = 5;
+    ENTITY_GENRE = 6;
+    ENTITY_TAG = 7;
+}
+
+enum EntityOnModeration {
+    ENTITY_ON_MODERATION_UNDEFINED = 0;
+    ENTITY_ON_MODERATION_TITLE = 1;
+    ENTITY_ON_MODERATION_CHAPTER = 2;
+    ENTITY_ON_MODERATION_TEAM = 3;
+    ENTITY_ON_MODERATION_PROFILE_CHANGES = 4;
+    ENTITY_ON_MODERATION_AUTHOR = 5;
+    ENTITY_ON_MODERATION_GENRE = 6;
+    ENTITY_ON_MODERATION_TAG = 7;
+}
+

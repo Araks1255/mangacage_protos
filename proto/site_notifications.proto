@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package site_notifications;
+
+import "enums.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/Araks1255/mangacage_protos/gen/site_notifications";
+
+service SiteNotifications {
+    rpc NotifyAboutNewModerationRequest (ModerationRequest) returns (google.protobuf.Empty);
+    rpc NotifyAboutTeamJoinRequestResponse (TeamJoinRequestResponse) returns (google.protobuf.Empty);
+    rpc NotifyAboutSubmittedTeamJoinRequest (TeamJoinRequest) returns (google.protobuf.Empty);
+    rpc NotifyAboutNewRole (NewRole) returns (google.protobuf.Empty);
+    rpc NotifyAboutTitleTranslateRequest (TitleTranslateRequest) returns (google.protobuf.Empty);
+}
+
+enum ResultOfTeamJoinRequest {
+    RESULT_OF_TEAM_JOIN_REQUEST_UNDEFINED = 0;
+    RESULT_OF_TEAM_JOIN_REQUEST_APPROVED = 1;
+    RESULT_OF_TEAM_JOIN_REQUEST_DECLINED = 2;
+}
+
+message TeamJoinRequestResponse {
+    uint64 TeamID = 1;
+    uint64 UserID = 2;
+    ResultOfTeamJoinRequest Result = 3;
+    string Reason = 4;
+}
+
+message TeamJoinRequest {
+    uint64 TeamID = 1;
+    uint64 CandidateID = 2;
+    string Message = 3;
+}
+
+message TitleTranslateRequest {
+    uint64 TitleID = 1;
+    uint64 SenderID = 2;
+    string Message = 3;
+}
+
+message NewRole {
+    uint64 UserID = 1;
+    uint64 RoleID = 2;
+}
+
+message ModerationRequest {
+    enums.EntityOnModeration EntityOnModeration = 1;
+    uint64 ID = 2;
+}
