@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	SiteNotifications_NotifyAboutNewModerationRequest_FullMethodName     = "/site_notifications.SiteNotifications/NotifyAboutNewModerationRequest"
+	SiteNotifications_NotifyAboutNewUserOnVerification_FullMethodName    = "/site_notifications.SiteNotifications/NotifyAboutNewUserOnVerification"
 	SiteNotifications_NotifyAboutTeamJoinRequestResponse_FullMethodName  = "/site_notifications.SiteNotifications/NotifyAboutTeamJoinRequestResponse"
 	SiteNotifications_NotifyAboutSubmittedTeamJoinRequest_FullMethodName = "/site_notifications.SiteNotifications/NotifyAboutSubmittedTeamJoinRequest"
 	SiteNotifications_NotifyUserAboutNewRole_FullMethodName              = "/site_notifications.SiteNotifications/NotifyUserAboutNewRole"
@@ -32,6 +33,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SiteNotificationsClient interface {
 	NotifyAboutNewModerationRequest(ctx context.Context, in *ModerationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	NotifyAboutNewUserOnVerification(ctx context.Context, in *UserOnVerification, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NotifyAboutTeamJoinRequestResponse(ctx context.Context, in *TeamJoinRequestResponse, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NotifyAboutSubmittedTeamJoinRequest(ctx context.Context, in *TeamJoinRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NotifyUserAboutNewRole(ctx context.Context, in *NewRole, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -50,6 +52,16 @@ func (c *siteNotificationsClient) NotifyAboutNewModerationRequest(ctx context.Co
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, SiteNotifications_NotifyAboutNewModerationRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *siteNotificationsClient) NotifyAboutNewUserOnVerification(ctx context.Context, in *UserOnVerification, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, SiteNotifications_NotifyAboutNewUserOnVerification_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -101,6 +113,7 @@ func (c *siteNotificationsClient) NotifyAboutTitleTranslateRequest(ctx context.C
 // for forward compatibility.
 type SiteNotificationsServer interface {
 	NotifyAboutNewModerationRequest(context.Context, *ModerationRequest) (*emptypb.Empty, error)
+	NotifyAboutNewUserOnVerification(context.Context, *UserOnVerification) (*emptypb.Empty, error)
 	NotifyAboutTeamJoinRequestResponse(context.Context, *TeamJoinRequestResponse) (*emptypb.Empty, error)
 	NotifyAboutSubmittedTeamJoinRequest(context.Context, *TeamJoinRequest) (*emptypb.Empty, error)
 	NotifyUserAboutNewRole(context.Context, *NewRole) (*emptypb.Empty, error)
@@ -117,6 +130,9 @@ type UnimplementedSiteNotificationsServer struct{}
 
 func (UnimplementedSiteNotificationsServer) NotifyAboutNewModerationRequest(context.Context, *ModerationRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutNewModerationRequest not implemented")
+}
+func (UnimplementedSiteNotificationsServer) NotifyAboutNewUserOnVerification(context.Context, *UserOnVerification) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutNewUserOnVerification not implemented")
 }
 func (UnimplementedSiteNotificationsServer) NotifyAboutTeamJoinRequestResponse(context.Context, *TeamJoinRequestResponse) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutTeamJoinRequestResponse not implemented")
@@ -165,6 +181,24 @@ func _SiteNotifications_NotifyAboutNewModerationRequest_Handler(srv interface{},
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SiteNotificationsServer).NotifyAboutNewModerationRequest(ctx, req.(*ModerationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SiteNotifications_NotifyAboutNewUserOnVerification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserOnVerification)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SiteNotificationsServer).NotifyAboutNewUserOnVerification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SiteNotifications_NotifyAboutNewUserOnVerification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SiteNotificationsServer).NotifyAboutNewUserOnVerification(ctx, req.(*UserOnVerification))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -251,6 +285,10 @@ var SiteNotifications_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "NotifyAboutNewModerationRequest",
 			Handler:    _SiteNotifications_NotifyAboutNewModerationRequest_Handler,
+		},
+		{
+			MethodName: "NotifyAboutNewUserOnVerification",
+			Handler:    _SiteNotifications_NotifyAboutNewUserOnVerification_Handler,
 		},
 		{
 			MethodName: "NotifyAboutTeamJoinRequestResponse",

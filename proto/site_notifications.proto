@@ -9,6 +9,7 @@ option go_package = "github.com/Araks1255/mangacage_protos/gen/site_notification
 
 service SiteNotifications {
     rpc NotifyAboutNewModerationRequest (ModerationRequest) returns (google.protobuf.Empty);
+    rpc NotifyAboutNewUserOnVerification (UserOnVerification) returns (google.protobuf.Empty);
     rpc NotifyAboutTeamJoinRequestResponse (TeamJoinRequestResponse) returns (google.protobuf.Empty);
     rpc NotifyAboutSubmittedTeamJoinRequest (TeamJoinRequest) returns (google.protobuf.Empty);
     rpc NotifyUserAboutNewRole (NewRole) returns (google.protobuf.Empty);
@@ -42,4 +43,8 @@ message NewRole {
 message ModerationRequest {
     enums.EntityOnModeration EntityOnModeration = 1;
     uint64 ID = 2;
+}
+
+message UserOnVerification {
+    uint64 ID = 1;
 }
