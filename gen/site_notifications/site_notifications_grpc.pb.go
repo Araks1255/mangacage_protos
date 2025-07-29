@@ -23,7 +23,7 @@ const (
 	SiteNotifications_NotifyAboutNewModerationRequest_FullMethodName     = "/site_notifications.SiteNotifications/NotifyAboutNewModerationRequest"
 	SiteNotifications_NotifyAboutTeamJoinRequestResponse_FullMethodName  = "/site_notifications.SiteNotifications/NotifyAboutTeamJoinRequestResponse"
 	SiteNotifications_NotifyAboutSubmittedTeamJoinRequest_FullMethodName = "/site_notifications.SiteNotifications/NotifyAboutSubmittedTeamJoinRequest"
-	SiteNotifications_NotifyAboutNewRole_FullMethodName                  = "/site_notifications.SiteNotifications/NotifyAboutNewRole"
+	SiteNotifications_NotifyUserAboutNewRole_FullMethodName              = "/site_notifications.SiteNotifications/NotifyUserAboutNewRole"
 	SiteNotifications_NotifyAboutTitleTranslateRequest_FullMethodName    = "/site_notifications.SiteNotifications/NotifyAboutTitleTranslateRequest"
 )
 
@@ -34,7 +34,7 @@ type SiteNotificationsClient interface {
 	NotifyAboutNewModerationRequest(ctx context.Context, in *ModerationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NotifyAboutTeamJoinRequestResponse(ctx context.Context, in *TeamJoinRequestResponse, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NotifyAboutSubmittedTeamJoinRequest(ctx context.Context, in *TeamJoinRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	NotifyAboutNewRole(ctx context.Context, in *NewRole, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	NotifyUserAboutNewRole(ctx context.Context, in *NewRole, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NotifyAboutTitleTranslateRequest(ctx context.Context, in *TitleTranslateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -76,10 +76,10 @@ func (c *siteNotificationsClient) NotifyAboutSubmittedTeamJoinRequest(ctx contex
 	return out, nil
 }
 
-func (c *siteNotificationsClient) NotifyAboutNewRole(ctx context.Context, in *NewRole, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *siteNotificationsClient) NotifyUserAboutNewRole(ctx context.Context, in *NewRole, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, SiteNotifications_NotifyAboutNewRole_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, SiteNotifications_NotifyUserAboutNewRole_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +103,7 @@ type SiteNotificationsServer interface {
 	NotifyAboutNewModerationRequest(context.Context, *ModerationRequest) (*emptypb.Empty, error)
 	NotifyAboutTeamJoinRequestResponse(context.Context, *TeamJoinRequestResponse) (*emptypb.Empty, error)
 	NotifyAboutSubmittedTeamJoinRequest(context.Context, *TeamJoinRequest) (*emptypb.Empty, error)
-	NotifyAboutNewRole(context.Context, *NewRole) (*emptypb.Empty, error)
+	NotifyUserAboutNewRole(context.Context, *NewRole) (*emptypb.Empty, error)
 	NotifyAboutTitleTranslateRequest(context.Context, *TitleTranslateRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedSiteNotificationsServer()
 }
@@ -124,8 +124,8 @@ func (UnimplementedSiteNotificationsServer) NotifyAboutTeamJoinRequestResponse(c
 func (UnimplementedSiteNotificationsServer) NotifyAboutSubmittedTeamJoinRequest(context.Context, *TeamJoinRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutSubmittedTeamJoinRequest not implemented")
 }
-func (UnimplementedSiteNotificationsServer) NotifyAboutNewRole(context.Context, *NewRole) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutNewRole not implemented")
+func (UnimplementedSiteNotificationsServer) NotifyUserAboutNewRole(context.Context, *NewRole) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NotifyUserAboutNewRole not implemented")
 }
 func (UnimplementedSiteNotificationsServer) NotifyAboutTitleTranslateRequest(context.Context, *TitleTranslateRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutTitleTranslateRequest not implemented")
@@ -205,20 +205,20 @@ func _SiteNotifications_NotifyAboutSubmittedTeamJoinRequest_Handler(srv interfac
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SiteNotifications_NotifyAboutNewRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SiteNotifications_NotifyUserAboutNewRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(NewRole)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SiteNotificationsServer).NotifyAboutNewRole(ctx, in)
+		return srv.(SiteNotificationsServer).NotifyUserAboutNewRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SiteNotifications_NotifyAboutNewRole_FullMethodName,
+		FullMethod: SiteNotifications_NotifyUserAboutNewRole_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SiteNotificationsServer).NotifyAboutNewRole(ctx, req.(*NewRole))
+		return srv.(SiteNotificationsServer).NotifyUserAboutNewRole(ctx, req.(*NewRole))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -261,8 +261,8 @@ var SiteNotifications_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SiteNotifications_NotifyAboutSubmittedTeamJoinRequest_Handler,
 		},
 		{
-			MethodName: "NotifyAboutNewRole",
-			Handler:    _SiteNotifications_NotifyAboutNewRole_Handler,
+			MethodName: "NotifyUserAboutNewRole",
+			Handler:    _SiteNotifications_NotifyUserAboutNewRole_Handler,
 		},
 		{
 			MethodName: "NotifyAboutTitleTranslateRequest",

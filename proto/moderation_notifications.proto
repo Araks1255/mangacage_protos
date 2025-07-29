@@ -9,7 +9,6 @@ option go_package = "github.com/Araks1255/mangacage_protos/gen/moderation_notifi
 
 service ModerationNotifications {
     rpc NotifyAboutApprovedModerationRequest (ApprovedEntity) returns (google.protobuf.Empty);
-    
     rpc NotifyAboutNewChapterInTitle (Chapter) returns (google.protobuf.Empty);
     rpc SendMessageToUser (MessageFromModerator) returns (google.protobuf.Empty);
     rpc SendModerationRequestDeclineReason (ModerationRequestDeclineReason) returns (google.protobuf.Empty);
@@ -23,8 +22,9 @@ message MessageFromModerator {
 
 message ModerationRequestDeclineReason {
     uint64 CreatorID = 1;
-    enums.EntityOnModeration EntityOnModeration = 2;
-    string Reason = 3;
+    string EntityName = 2;
+    enums.EntityOnModeration EntityOnModeration = 3;
+    string Reason = 4;
 }
 
 message ApprovedEntity {

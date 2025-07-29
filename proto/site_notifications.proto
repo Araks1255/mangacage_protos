@@ -11,20 +11,14 @@ service SiteNotifications {
     rpc NotifyAboutNewModerationRequest (ModerationRequest) returns (google.protobuf.Empty);
     rpc NotifyAboutTeamJoinRequestResponse (TeamJoinRequestResponse) returns (google.protobuf.Empty);
     rpc NotifyAboutSubmittedTeamJoinRequest (TeamJoinRequest) returns (google.protobuf.Empty);
-    rpc NotifyAboutNewRole (NewRole) returns (google.protobuf.Empty);
+    rpc NotifyUserAboutNewRole (NewRole) returns (google.protobuf.Empty);
     rpc NotifyAboutTitleTranslateRequest (TitleTranslateRequest) returns (google.protobuf.Empty);
-}
-
-enum ResultOfTeamJoinRequest {
-    RESULT_OF_TEAM_JOIN_REQUEST_UNDEFINED = 0;
-    RESULT_OF_TEAM_JOIN_REQUEST_APPROVED = 1;
-    RESULT_OF_TEAM_JOIN_REQUEST_DECLINED = 2;
 }
 
 message TeamJoinRequestResponse {
     uint64 TeamID = 1;
     uint64 UserID = 2;
-    ResultOfTeamJoinRequest Result = 3;
+    enums.ResultOfTeamJoinRequest Result = 3;
     string Reason = 4;
 }
 
