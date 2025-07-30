@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	ModerationNotifications_NotifyAboutApprovedModerationRequest_FullMethodName = "/moderation_notifications.ModerationNotifications/NotifyAboutApprovedModerationRequest"
+	ModerationNotifications_NotifyUserAboutVerificatedAccount_FullMethodName    = "/moderation_notifications.ModerationNotifications/NotifyUserAboutVerificatedAccount"
 	ModerationNotifications_NotifyAboutNewChapterInTitle_FullMethodName         = "/moderation_notifications.ModerationNotifications/NotifyAboutNewChapterInTitle"
 	ModerationNotifications_SendMessageToUser_FullMethodName                    = "/moderation_notifications.ModerationNotifications/SendMessageToUser"
 	ModerationNotifications_SendModerationRequestDeclineReason_FullMethodName   = "/moderation_notifications.ModerationNotifications/SendModerationRequestDeclineReason"
@@ -31,6 +32,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ModerationNotificationsClient interface {
 	NotifyAboutApprovedModerationRequest(ctx context.Context, in *ApprovedEntity, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	NotifyUserAboutVerificatedAccount(ctx context.Context, in *VerificatedUser, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NotifyAboutNewChapterInTitle(ctx context.Context, in *Chapter, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	SendMessageToUser(ctx context.Context, in *MessageFromModerator, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	SendModerationRequestDeclineReason(ctx context.Context, in *ModerationRequestDeclineReason, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -48,6 +50,16 @@ func (c *moderationNotificationsClient) NotifyAboutApprovedModerationRequest(ctx
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, ModerationNotifications_NotifyAboutApprovedModerationRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *moderationNotificationsClient) NotifyUserAboutVerificatedAccount(ctx context.Context, in *VerificatedUser, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ModerationNotifications_NotifyUserAboutVerificatedAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -89,6 +101,7 @@ func (c *moderationNotificationsClient) SendModerationRequestDeclineReason(ctx c
 // for forward compatibility.
 type ModerationNotificationsServer interface {
 	NotifyAboutApprovedModerationRequest(context.Context, *ApprovedEntity) (*emptypb.Empty, error)
+	NotifyUserAboutVerificatedAccount(context.Context, *VerificatedUser) (*emptypb.Empty, error)
 	NotifyAboutNewChapterInTitle(context.Context, *Chapter) (*emptypb.Empty, error)
 	SendMessageToUser(context.Context, *MessageFromModerator) (*emptypb.Empty, error)
 	SendModerationRequestDeclineReason(context.Context, *ModerationRequestDeclineReason) (*emptypb.Empty, error)
@@ -104,6 +117,9 @@ type UnimplementedModerationNotificationsServer struct{}
 
 func (UnimplementedModerationNotificationsServer) NotifyAboutApprovedModerationRequest(context.Context, *ApprovedEntity) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutApprovedModerationRequest not implemented")
+}
+func (UnimplementedModerationNotificationsServer) NotifyUserAboutVerificatedAccount(context.Context, *VerificatedUser) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NotifyUserAboutVerificatedAccount not implemented")
 }
 func (UnimplementedModerationNotificationsServer) NotifyAboutNewChapterInTitle(context.Context, *Chapter) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutNewChapterInTitle not implemented")
@@ -150,6 +166,24 @@ func _ModerationNotifications_NotifyAboutApprovedModerationRequest_Handler(srv i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ModerationNotificationsServer).NotifyAboutApprovedModerationRequest(ctx, req.(*ApprovedEntity))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ModerationNotifications_NotifyUserAboutVerificatedAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerificatedUser)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ModerationNotificationsServer).NotifyUserAboutVerificatedAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ModerationNotifications_NotifyUserAboutVerificatedAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ModerationNotificationsServer).NotifyUserAboutVerificatedAccount(ctx, req.(*VerificatedUser))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -218,6 +252,10 @@ var ModerationNotifications_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "NotifyAboutApprovedModerationRequest",
 			Handler:    _ModerationNotifications_NotifyAboutApprovedModerationRequest_Handler,
+		},
+		{
+			MethodName: "NotifyUserAboutVerificatedAccount",
+			Handler:    _ModerationNotifications_NotifyUserAboutVerificatedAccount_Handler,
 		},
 		{
 			MethodName: "NotifyAboutNewChapterInTitle",
