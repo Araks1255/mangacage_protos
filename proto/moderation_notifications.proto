@@ -18,7 +18,8 @@ service ModerationNotifications {
 message MessageFromModerator {
     uint64 ReceiverID = 1;
     enums.EntityOnModeration EntityOnModeration = 2;
-    string Text = 3 ;
+    uint64 EntityOnModerationID = 3;
+    string Text = 4;
 }
 
 message ModerationRequestDeclineReason {
