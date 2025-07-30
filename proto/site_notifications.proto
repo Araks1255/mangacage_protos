@@ -17,10 +17,11 @@ service SiteNotifications {
 }
 
 message TeamJoinRequestResponse {
-    uint64 TeamID = 1;
-    uint64 UserID = 2;
-    enums.ResultOfTeamJoinRequest Result = 3;
-    string Reason = 4;
+    uint64 JoinRequestID = 1;
+    uint64 TeamID = 2;
+    uint64 UserID = 3;
+    enums.ResultOfTeamJoinRequest Result = 4;
+    string Reason = 6;
 }
 
 message TeamJoinRequest {
