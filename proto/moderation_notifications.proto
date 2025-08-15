@@ -10,9 +10,11 @@ option go_package = "github.com/Araks1255/mangacage_protos/gen/moderation_notifi
 service ModerationNotifications {
     rpc NotifyAboutApprovedModerationRequest (ApprovedEntity) returns (google.protobuf.Empty);
     rpc NotifyUserAboutVerificatedAccount (VerificatedUser) returns (google.protobuf.Empty);
+    rpc NotifyAboutApprovedTitleTranslateRequest (TitleTranslateRequest) returns (google.protobuf.Empty);
     rpc NotifyAboutNewChapterInTitle (Chapter) returns (google.protobuf.Empty);
     rpc SendMessageToUser (MessageFromModerator) returns (google.protobuf.Empty);
     rpc SendModerationRequestDeclineReason (ModerationRequestDeclineReason) returns (google.protobuf.Empty);
+    rpc NotifyAboutDeclinedTitleTranslateRequest(TitleTranslateRequest) returns (google.protobuf.Empty);
 }
 
 message MessageFromModerator {
@@ -41,4 +43,9 @@ message Chapter {
 
 message VerificatedUser {
     uint64 ID = 1; 
+}
+
+message TitleTranslateRequest {
+    uint64 SenderID = 1;
+    uint64 TitleID = 2;
 }

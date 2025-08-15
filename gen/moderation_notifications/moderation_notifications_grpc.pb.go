@@ -20,11 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ModerationNotifications_NotifyAboutApprovedModerationRequest_FullMethodName = "/moderation_notifications.ModerationNotifications/NotifyAboutApprovedModerationRequest"
-	ModerationNotifications_NotifyUserAboutVerificatedAccount_FullMethodName    = "/moderation_notifications.ModerationNotifications/NotifyUserAboutVerificatedAccount"
-	ModerationNotifications_NotifyAboutNewChapterInTitle_FullMethodName         = "/moderation_notifications.ModerationNotifications/NotifyAboutNewChapterInTitle"
-	ModerationNotifications_SendMessageToUser_FullMethodName                    = "/moderation_notifications.ModerationNotifications/SendMessageToUser"
-	ModerationNotifications_SendModerationRequestDeclineReason_FullMethodName   = "/moderation_notifications.ModerationNotifications/SendModerationRequestDeclineReason"
+	ModerationNotifications_NotifyAboutApprovedModerationRequest_FullMethodName     = "/moderation_notifications.ModerationNotifications/NotifyAboutApprovedModerationRequest"
+	ModerationNotifications_NotifyUserAboutVerificatedAccount_FullMethodName        = "/moderation_notifications.ModerationNotifications/NotifyUserAboutVerificatedAccount"
+	ModerationNotifications_NotifyAboutApprovedTitleTranslateRequest_FullMethodName = "/moderation_notifications.ModerationNotifications/NotifyAboutApprovedTitleTranslateRequest"
+	ModerationNotifications_NotifyAboutNewChapterInTitle_FullMethodName             = "/moderation_notifications.ModerationNotifications/NotifyAboutNewChapterInTitle"
+	ModerationNotifications_SendMessageToUser_FullMethodName                        = "/moderation_notifications.ModerationNotifications/SendMessageToUser"
+	ModerationNotifications_SendModerationRequestDeclineReason_FullMethodName       = "/moderation_notifications.ModerationNotifications/SendModerationRequestDeclineReason"
+	ModerationNotifications_NotifyAboutDeclinedTitleTranslateRequest_FullMethodName = "/moderation_notifications.ModerationNotifications/NotifyAboutDeclinedTitleTranslateRequest"
 )
 
 // ModerationNotificationsClient is the client API for ModerationNotifications service.
@@ -33,9 +35,11 @@ const (
 type ModerationNotificationsClient interface {
 	NotifyAboutApprovedModerationRequest(ctx context.Context, in *ApprovedEntity, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NotifyUserAboutVerificatedAccount(ctx context.Context, in *VerificatedUser, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	NotifyAboutApprovedTitleTranslateRequest(ctx context.Context, in *TitleTranslateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NotifyAboutNewChapterInTitle(ctx context.Context, in *Chapter, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	SendMessageToUser(ctx context.Context, in *MessageFromModerator, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	SendModerationRequestDeclineReason(ctx context.Context, in *ModerationRequestDeclineReason, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	NotifyAboutDeclinedTitleTranslateRequest(ctx context.Context, in *TitleTranslateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type moderationNotificationsClient struct {
@@ -60,6 +64,16 @@ func (c *moderationNotificationsClient) NotifyUserAboutVerificatedAccount(ctx co
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, ModerationNotifications_NotifyUserAboutVerificatedAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *moderationNotificationsClient) NotifyAboutApprovedTitleTranslateRequest(ctx context.Context, in *TitleTranslateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ModerationNotifications_NotifyAboutApprovedTitleTranslateRequest_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -96,15 +110,27 @@ func (c *moderationNotificationsClient) SendModerationRequestDeclineReason(ctx c
 	return out, nil
 }
 
+func (c *moderationNotificationsClient) NotifyAboutDeclinedTitleTranslateRequest(ctx context.Context, in *TitleTranslateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ModerationNotifications_NotifyAboutDeclinedTitleTranslateRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ModerationNotificationsServer is the server API for ModerationNotifications service.
 // All implementations must embed UnimplementedModerationNotificationsServer
 // for forward compatibility.
 type ModerationNotificationsServer interface {
 	NotifyAboutApprovedModerationRequest(context.Context, *ApprovedEntity) (*emptypb.Empty, error)
 	NotifyUserAboutVerificatedAccount(context.Context, *VerificatedUser) (*emptypb.Empty, error)
+	NotifyAboutApprovedTitleTranslateRequest(context.Context, *TitleTranslateRequest) (*emptypb.Empty, error)
 	NotifyAboutNewChapterInTitle(context.Context, *Chapter) (*emptypb.Empty, error)
 	SendMessageToUser(context.Context, *MessageFromModerator) (*emptypb.Empty, error)
 	SendModerationRequestDeclineReason(context.Context, *ModerationRequestDeclineReason) (*emptypb.Empty, error)
+	NotifyAboutDeclinedTitleTranslateRequest(context.Context, *TitleTranslateRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedModerationNotificationsServer()
 }
 
@@ -121,6 +147,9 @@ func (UnimplementedModerationNotificationsServer) NotifyAboutApprovedModerationR
 func (UnimplementedModerationNotificationsServer) NotifyUserAboutVerificatedAccount(context.Context, *VerificatedUser) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyUserAboutVerificatedAccount not implemented")
 }
+func (UnimplementedModerationNotificationsServer) NotifyAboutApprovedTitleTranslateRequest(context.Context, *TitleTranslateRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutApprovedTitleTranslateRequest not implemented")
+}
 func (UnimplementedModerationNotificationsServer) NotifyAboutNewChapterInTitle(context.Context, *Chapter) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutNewChapterInTitle not implemented")
 }
@@ -129,6 +158,9 @@ func (UnimplementedModerationNotificationsServer) SendMessageToUser(context.Cont
 }
 func (UnimplementedModerationNotificationsServer) SendModerationRequestDeclineReason(context.Context, *ModerationRequestDeclineReason) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendModerationRequestDeclineReason not implemented")
+}
+func (UnimplementedModerationNotificationsServer) NotifyAboutDeclinedTitleTranslateRequest(context.Context, *TitleTranslateRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NotifyAboutDeclinedTitleTranslateRequest not implemented")
 }
 func (UnimplementedModerationNotificationsServer) mustEmbedUnimplementedModerationNotificationsServer() {
 }
@@ -188,6 +220,24 @@ func _ModerationNotifications_NotifyUserAboutVerificatedAccount_Handler(srv inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ModerationNotifications_NotifyAboutApprovedTitleTranslateRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TitleTranslateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ModerationNotificationsServer).NotifyAboutApprovedTitleTranslateRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ModerationNotifications_NotifyAboutApprovedTitleTranslateRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ModerationNotificationsServer).NotifyAboutApprovedTitleTranslateRequest(ctx, req.(*TitleTranslateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ModerationNotifications_NotifyAboutNewChapterInTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Chapter)
 	if err := dec(in); err != nil {
@@ -242,6 +292,24 @@ func _ModerationNotifications_SendModerationRequestDeclineReason_Handler(srv int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ModerationNotifications_NotifyAboutDeclinedTitleTranslateRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TitleTranslateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ModerationNotificationsServer).NotifyAboutDeclinedTitleTranslateRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ModerationNotifications_NotifyAboutDeclinedTitleTranslateRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ModerationNotificationsServer).NotifyAboutDeclinedTitleTranslateRequest(ctx, req.(*TitleTranslateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ModerationNotifications_ServiceDesc is the grpc.ServiceDesc for ModerationNotifications service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -258,6 +326,10 @@ var ModerationNotifications_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ModerationNotifications_NotifyUserAboutVerificatedAccount_Handler,
 		},
 		{
+			MethodName: "NotifyAboutApprovedTitleTranslateRequest",
+			Handler:    _ModerationNotifications_NotifyAboutApprovedTitleTranslateRequest_Handler,
+		},
+		{
 			MethodName: "NotifyAboutNewChapterInTitle",
 			Handler:    _ModerationNotifications_NotifyAboutNewChapterInTitle_Handler,
 		},
@@ -268,6 +340,10 @@ var ModerationNotifications_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendModerationRequestDeclineReason",
 			Handler:    _ModerationNotifications_SendModerationRequestDeclineReason_Handler,
+		},
+		{
+			MethodName: "NotifyAboutDeclinedTitleTranslateRequest",
+			Handler:    _ModerationNotifications_NotifyAboutDeclinedTitleTranslateRequest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
