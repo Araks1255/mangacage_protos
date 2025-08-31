@@ -46,6 +46,6 @@ message VerificatedUser {
 }
 
 message TitleTranslateRequest {
-    uint64 SenderID = 1;
+    uint64 TeamID = 1;
     uint64 TitleID = 2;
 }
